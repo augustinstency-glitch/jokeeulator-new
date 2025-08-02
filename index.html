@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UselessCalc™</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .calculator {
+      background-color: #111;
+      padding: 20px;
+      border-radius: 20px;
+      width: 420px;
+    }
+
+    .display {
+      background-color: #000;
+      color: #0f0;
+      font-size: 1.6em;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      min-height: 60px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .loading-text {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.75em;
+      color: #0f0;
+      animation: blink 1s step-start infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      padding: 15px;
+      font-size: 0.95em;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #555;
+    }
+
+    .orange {
+      background: orange;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <div id="display" class="display">Enter Numbers...</div>
+    <div class="buttons">
+      <button onclick="press('sin(')">sin</button>
+      <button onclick="press('cos(')">cos</button>
+      <button onclick="press('tan(')">tan</button>
+      <button onclick="press('log(')">log</button>
+      <button onclick="press('ln(')">ln</button>
+
+      <button onclick="press('√(')">√</button>
+      <button onclick="press('^2')">x²</button>
+      <button onclick="press('!')">x!</button>
+      <button onclick="press('EXP')">EXP</button>
+      <button onclick="press('%')">%</button>
+
+      <button onclick="press('(')">(</button>
+      <button onclick="press(')')">)</button>
+      <button onclick="press('π')">π</button>
+      <button onclick="press('e')">e</button>
+      <button onclick="press('^')">^</button>
+
+      <button onclick="press('7')">7</button>
+      <button onclick="press('8')">8</button>
+      <button onclick="press('9')">9</button>
+      <button onclick="press('/')">÷</button>
+      <button onclick="clearDisplay()">C</button>
+
+      <button onclick="press('4')">4</button>
+      <button onclick="press('5')">5</button>
+      <button onclick="press('6')">6</button>
+      <button onclick="press('*')">×</button>
+      <button onclick="press('.')">.</button>
+
+      <button onclick="press('1')">1</button>
+      <button onclick="press('2')">2</button>
+      <button onclick="press('3')">3</button>
+      <button onclick="press('-')">−</button>
+      <button onclick="press('0')">0</button>
+
+      <button onclick="press('+')">+</button>
+      <button class="orange" onclick="showLoading()">=</button>
+    </div>
+  </div>
+
+  <script>
+    let input = "";
+    const display = document.getElementById("display");
+
+    function press(val) {
+      input += val;
+      display.innerText = input;
+    }
+
+    function clearDisplay() {
+      input = "";
+      display.innerText = "Enter Numbers...";
+    }
+
+    function showLoading() {
+  display.innerHTML = `<div class="loading-text">LOADING...</div>`;
+  
+  // Store the current input in the browser's local storage
+  localStorage.setItem('calculatorInput', input);
+  
+  // After 10 seconds, redirect to the insult page
+  setTimeout(() => {
+    window.location.href = "insult.html";
+  }, 10000);
+}
+  </script>
+</body>
+</html>
